@@ -1,3 +1,5 @@
+# Gets data from Arduino and sends it to Adafruit Api
+
 import serial
 import adafruit_api
 import time

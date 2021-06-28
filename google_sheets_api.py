@@ -14,9 +14,9 @@ class api_class:
         self.my_data = [['9','3', '20','312'],['11','4','23','295']]
         self.SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
         # create and download credential json file from console.cloud.google.com
-        self.SERVICE_ACCOUNT_FILE = 'tutorial_keys.json'
-        self.pwd = os.getcwd()
-        self.filename = os.path.join(self.pwd, "tutorial_keys.json")
+        self.SERVICE_ACCOUNT_FILE = 'google-credentials.json'
+        #self.pwd = os.getcwd()
+        #self.filename = os.path.join(self.pwd, "google-credentials.json")
 
         self.creds = None
         self.creds = service_account.Credentials.from_service_account_file(
@@ -56,7 +56,7 @@ class api_class:
 
     def append_data(self, my_data):
         request = self.sheet.values().append(spreadsheetId=self.SPREADSHEET_ID, 
-                                    range='sensor!A5', valueInputOption='USER_ENTERED', insertDataOption='INSERT_ROWS', body={'values':my_data})
+                                    range='sensor!A2', valueInputOption='USER_ENTERED', insertDataOption='INSERT_ROWS', body={'values':my_data})
         response = request.execute()
         print("finished appending data:")
         print(my_data)
@@ -70,7 +70,14 @@ class api_class:
 
         current_data = self.read_data()
         last_id = current_data[-1][0]
-        if not last_id:
+        #print(current_data)
+        #print("-")
+        #print(last_id)
+        #print(type(last_id))
+        #print("-")
+        #exit()
+        
+        if last_id== "id" or last_id=="":
             this_id = 1
         else: 
             this_id = str(int(last_id)+1)
